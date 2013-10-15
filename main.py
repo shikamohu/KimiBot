@@ -3,6 +3,8 @@
 
 import sqlite3
 import random
+import sys
+
 
 if __name__ == "__main__":
 
@@ -24,8 +26,7 @@ if __name__ == "__main__":
     while 1:
 
         #キーボード入力の文字列を受け取る
-        str = raw_input("you: ")
-        print "you: " + str
+        str = raw_input("you: ").decode(sys.stdin.encoding)   #.decode(sys.stdin.encoding)とすると、エラーがでない
 
         #入力文字列が「さようなら」なら終了
         if str == u"さようなら":
@@ -33,7 +34,7 @@ if __name__ == "__main__":
             print u"アプリケーションを終了しました"
             break
 
-        #入力文字列をデータベースに保存
+        #入力文字列をデータベースのunknownテーブルに保存
         sql = "insert into unknown values('%s')" % (str)
         con.execute(sql)
 
